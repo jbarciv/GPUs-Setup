@@ -2,7 +2,7 @@
 
 ## Description
 
-The next respository summarizes the basics steps to run a small cluster of GPUs. Basic tips and many links are provided to facilitate research.
+The next respository summarizes the basics steps to run a small cluster of GPUs. Basic tips and many links are provided to facilitate installation. The underlying intention is based on neuroevolutionary algorithms for research purposes.
 
 ## Table of Contents
 
