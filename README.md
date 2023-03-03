@@ -53,17 +53,14 @@ We recommend to create an *alias* in ```.bashrc``` for automatizing the login, i
 
 ## Venv
 
-First be sure that *python3* is already installed. If not, you can install it this way: `sudo apt install python3`.
-
-Then we are going to install these packages:
-`sudo apt install python3-pip`,
-`sudo apt-get install python3-venv` or `sudo pip install virtualenv` if *pip* does not work use this:
-`python3 -m pip install <paquete>`. Where paquete is *virtualenv*.
-
+First be sure that *python3* is already installed. If not, you can install it this way: 
+```
+sudo apt install python3
+```
 Finally, we can create the virtual environment:
-
-`python3 -m venv ~/.python_venv`
-
+```
+python3 -m venv ~/.python_venv
+```
 feel free to change *the path* for something more suitable for you.
 
 Edit your ```.bashrc``` on your server and include an alias for activating your *venv*: i.e., ```alias myenv="source ~/.virtual/bin/activate"```, change the folder structure with yours. For exiting the *venv*, just type ```deactivate```.
