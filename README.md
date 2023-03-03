@@ -8,7 +8,8 @@ The next respository summarizes the basics steps to run a small cluster of GPUs.
 
 - [Server](#server)
 - [Virtual environment](#venv)
-- [CUDA and Python: Numba](#numba)
+- [TensorFlow 2 and Keras](#tensorflow2)
+- [GPU Drivers](#gpus)
 
 ## Server
 
@@ -65,13 +66,32 @@ feel free to change *the path* for something more suitable for you.
 
 Edit your ```.bashrc``` on your server and include an alias for activating your *venv*: i.e., ```alias myenv="source ~/.virtual/bin/activate"```, change the folder structure with yours. For exiting the *venv*, just type ```deactivate```.
 
-## Numba 
+## TensorFlow2
+When you install TensorFlow 2.0+,  Keras will be automatically installed, as well.
 
-First check the [Nvidia website](https://developer.nvidia.com/how-to-cuda-python). Also, this [link](https://github.com/ContinuumIO/gtc2017-numba) is a good start point for Numba (Python + CUDA). We will be using Numba in Deep Learning Research.
+**Note:** TensorFlow and Keras require Python 3.6+ (Python 3.8 requires TensorFlow 2.2+) , and the latest version of pip.
 
-Prerequisites before installing:
-- (1) CUDA-capable GPUs
-- (2) CUDA Toolkit installed
+To install TensorFlow for CPU and GPU processors, run the following command:
+```
+pip install tensorflow
+```
 
-> Check (1) with this command on your server: ```lspci | grep -i nvidia```. \\
-> Install CUDA Toolkit downloading [this](https://developer.nvidia.com/cuda-downloads) and following the next instruction (for linux) [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
+## GPUs 
+
+If you’re fine with using the CPU to train your neural network, your installation is done. If you want to use your GPU to the training, you’ll need to do the following:
+
+- For Nvidia GPUs:
+  - Ensure you’re running a **CUDA®-enabled card**
+  - Install v11 or later of the **CUDA® Toolkit**
+  - If you’re working with Deep Neural Networks, you’ll should also install the latest version of the **cuDNN library**
+
+We will follow the installation guide [here](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html) and also [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/)
+
+### Prerequisites
+#### CUDA-capable GPUs
+Use this command:
+```
+lspci | grep -i nvidia
+```
+#### Driver Installation
+#### CUDA Toolkit installed
