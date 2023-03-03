@@ -1,4 +1,4 @@
-# new-setup
+# GPUs-Setup
 
 ## Description
 
