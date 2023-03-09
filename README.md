@@ -94,4 +94,36 @@ Use this command:
 lspci | grep -i nvidia
 ```
 #### Driver Installation
+1. Go to: [NVIDIA download drivers](http://www.nvidia.com/Download/index.aspx?lang=en-us)
+2. Select the GPU and OS version from the drop-down menus.
+3. Download and install the NVIDIA graphics driver as indicated on that web page. For more information, select the ADDITIONAL INFORMATION tab for step-by-step instructions for installing a driver.
+4. Restart your system to ensure that the graphics driver takes effect.
 #### CUDA Toolkit installed
+Refer to the following instructions for installing CUDA on Linux, including the CUDA driver and toolkit: [NVIDIA CUDA Installation Guide for Linux](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
+
+####  Installing Zlib
+For Ubuntu users, to install the zlib package, run:
+```
+sudo apt-get install zlib1g
+```
+
+#### Downloading cuDNN for Linux
+These are the installation instructions for Debian 11, Ubuntu 18.04, Ubuntu 20.04, and 22.04 users.
+1. Enable the repository. The following commands enable the repository containing information about the appropriate cuDNN libraries online for Debian 11, Ubuntu 18.04, Ubuntu 20.04, and 22.04.
+```
+wget https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/cuda-${OS}.pin
+sudo mv cuda-${OS}.pin /etc/apt/preferences.d/cuda-repository-pin-600
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/3bf863cc.pub
+sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /"
+sudo apt-get update
+```
+Where ${OS} is debian11, ubuntu1804, ubuntu2004, or ubuntu2204.
+
+2. Install the cuDNN library:
+```
+sudo apt-get install libcudnn8=${cudnn_version}-1+${cuda_version}
+sudo apt-get install libcudnn8-dev=${cudnn_version}-1+${cuda_version}
+```
+Where:
+${cudnn_version} is 8.8.0.121
+${cuda_version} is cuda12.0 or cuda11.8
