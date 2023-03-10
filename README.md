@@ -167,3 +167,30 @@ sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
 sudo apt-get install libcudnn8-samples=8.8.1.*-1+cuda12.0
 ```
+##### Verifying the Install on Linux
+To verify that cuDNN is installed and is running properly, compile the mnistCUDNN sample located in the `/usr/src/cudnn_samples_v8` directory in the Debian file.
+Copy the cuDNN samples to a writable path.
+```
+cp -r /usr/src/cudnn_samples_v8/ $HOME
+```
+Go to the writable path.
+```
+cd  $HOME/cudnn_samples_v8/mnistCUDNN
+```
+Compile the mnistCUDNN sample.
+```
+make clean && make
+```
+You maybe need to install this:
+```
+sudo apt-get install g++ freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev
+sudo apt-get install libfreeimage3 libfreeimage-dev
+```
+Finally, run the mnistCUDNN sample.
+```
+./mnistCUDNN
+```
+If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
+```
+Test passed!
+```
