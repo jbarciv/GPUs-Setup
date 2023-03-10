@@ -157,7 +157,13 @@ ${cudnn_version} is `8.8.1.*`
 
 ${cuda_version} is `cuda12.0` or `cuda11.8`
 
-Do not forget to add the *code samples* and the cuDNN library documentation:
+##### Do not forget to add the *code samples* and the cuDNN library documentation:
+
+Will be necesary to donwload the *.deb* file [here](https://developer.nvidia.com/rdp/cudnn-download).
+Do a `scp from_local to_host@ip:my_folder` and do the following:
 ```
+sudo dpkg -i cudnn-local-repo-${OS}-8.x.x.x_1.0-1_amd64.deb
+sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
 sudo apt-get install libcudnn8-samples=8.8.1.*-1+cuda12.0
 ```
