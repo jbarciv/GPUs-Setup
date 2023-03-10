@@ -85,7 +85,7 @@ If you’re fine with using the CPU to train your neural network, your installat
   - Install v11 or later of the **CUDA® Toolkit**
   - If you’re working with Deep Neural Networks, you’ll should also install the latest version of the **cuDNN library**
 
-We will follow the installation guide [here](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html) and also [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/)
+We will follow the installation from the [Cuda installation guide for linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/).
 
 ### Prerequisites
 #### CUDA-capable GPUs
@@ -93,21 +93,47 @@ Use this command:
 ```
 lspci | grep -i nvidia
 ```
-#### Driver Installation
-1. Go to: [NVIDIA download drivers](http://www.nvidia.com/Download/index.aspx?lang=en-us)
+#### Verify You Have a Supported Version of Linux
+```
+uname -m && cat /etc/*release
+```
+#### Verify the System Has gcc Installed
+```
+gcc --version
+```
+#### Verify the System has the Correct Kernel Headers and Development Packages Installed
+It is best to manually ensure the correct version of the kernel headers and development packages are installed prior to installing the CUDA Drivers, as well as whenever you change the kernel version.
+```
+uname -r
+```
+For Ubuntu, the kernel headers and development packages for the currently running kernel can be installed with:
+```
+sudo apt-get install linux-headers-$(uname -r)
+```
+### CUDA Drivers Installation & Cuda toolkit
+1. Go to: [NVIDIA download drivers](https://developer.nvidia.com/cuda-downloads)
 2. Select the GPU and OS version from the drop-down menus.
 3. Download and install the NVIDIA graphics driver as indicated on that web page. For more information, select the ADDITIONAL INFORMATION tab for step-by-step instructions for installing a driver.
 4. Restart your system to ensure that the graphics driver takes effect.
-#### CUDA Toolkit installed
-Refer to the following instructions for installing CUDA on Linux, including the CUDA driver and toolkit: [NVIDIA CUDA Installation Guide for Linux](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
 
-####  Installing Zlib
+We recommend for a cluster to install `deb(local)` as the installer type. The instructions will be summarized in the [NVIDIA download drivers](https://developer.nvidia.com/cuda-downloads) but are also explained in depth and generically in the [Cuda installation guide for linux (Ubuntu)](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu). 
+##### Some notes about drivers and Cuda versions
+From [this best practices guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#deploying-cuda-applications):
+- Each version of the CUDA Toolkit (and runtime) requires a minimum version of the NVIDIA driver. Applications compiled against a CUDA Toolkit version will only run on systems with the specified minimum driver version for that toolkit version. See next figure for an example.
+![alt text](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/_images/CTK-and-min-driver-versions.png)
+- For convenience, the **NVIDIA driver is installed as part of the CUDA Toolkit installation**. Note that this driver is for development purposes and is not recommended for use in production with Tesla GPUs.
+- For running CUDA applications in production with Tesla GPUs, it is recommended to download the latest driver for Tesla GPUs from the NVIDIA driver downloads site at https://www.nvidia.com/drivers.
+-During the installation of the CUDA Toolkit, the installation of the NVIDIA driver may be skipped on Windows (when using the interactive or silent installation) or on Linux (by using meta packages).
+- For meta packages on Linux, see https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#package-manager-metas.
+
+#### Downloading cuDNN for Linux
+See [here](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html) for all the info.
+##### Prerequisites: installing Zlib
 For Ubuntu users, to install the zlib package, run:
 ```
 sudo apt-get install zlib1g
 ```
-
-#### Downloading cuDNN for Linux
+##### Installation instructions
 These are the installation instructions for Debian 11, Ubuntu 18.04, Ubuntu 20.04, and 22.04 users.
 1. Enable the repository. The following commands enable the repository containing information about the appropriate cuDNN libraries online for Debian 11, Ubuntu 18.04, Ubuntu 20.04, and 22.04.
 ```
@@ -117,7 +143,7 @@ sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda
 sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /"
 sudo apt-get update
 ```
-Where ${OS} is debian11, ubuntu1804, ubuntu2004, or ubuntu2204.
+Where ${OS} is `debian11`, `ubuntu1804`, `ubuntu2004`, or `ubuntu2204`.
 
 2. Install the cuDNN library:
 ```
@@ -125,5 +151,6 @@ sudo apt-get install libcudnn8=${cudnn_version}-1+${cuda_version}
 sudo apt-get install libcudnn8-dev=${cudnn_version}-1+${cuda_version}
 ```
 Where:
-${cudnn_version} is 8.8.0.121
-${cuda_version} is cuda12.0 or cuda11.8
+${cudnn_version} is `8.8.1.*`
+
+${cuda_version} is `cuda12.0` or `cuda11.8`
