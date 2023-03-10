@@ -156,3 +156,8 @@ Where:
 ${cudnn_version} is `8.8.1.*`
 
 ${cuda_version} is `cuda12.0` or `cuda11.8`
+
+Do not forget to add the *code samples* and the cuDNN library documentation:
+```
+sudo apt-get install libcudnn8-samples=8.8.1.*-1+cuda12.0
+```
