@@ -146,6 +146,8 @@ sudo apt-get update
 Where ${OS} is `debian11`, `ubuntu1804`, `ubuntu2004`, or `ubuntu2204`.
 
 2. Install the cuDNN library:
+
+Before you start, please note that these libraries may already be installed...
 ```
 sudo apt-get install libcudnn8=${cudnn_version}-1+${cuda_version}
 sudo apt-get install libcudnn8-dev=${cudnn_version}-1+${cuda_version}
