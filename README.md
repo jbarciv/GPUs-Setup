@@ -64,7 +64,7 @@ python3 -m venv ~/.python_venv
 ```
 feel free to change *the path* for something more suitable for you.
 
-Edit your ```.bashrc``` on your server and include an alias for activating your *venv*: i.e., ```alias myenv="source ~/.virtual/bin/activate"```, change the folder structure with yours. For exiting the *venv*, just type ```deactivate```.
+Edit your ```.bashrc``` on your server and include an alias for activating your *venv*: i.e., ```alias myenv="source ~/.python_venv/bin/activate"```, change the folder structure with yours. For exiting the *venv*, just type ```deactivate```.
 
 ## TensorFlow2
 When you install TensorFlow 2.0+,  Keras will be automatically installed, as well.
