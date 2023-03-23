@@ -167,8 +167,11 @@ ${cuda_version} is `cuda12.0` or `cuda11.8`
 
 ##### Do not forget to add the *code samples* and the cuDNN library documentation:
 
-Will be necesary to donwload the *.deb* file [here](https://developer.nvidia.com/rdp/cudnn-download).
-Do a `scp from_local to_host@ip:my_folder` and do the following:
+Will be necesary to donwload the *.deb* file [here](https://developer.nvidia.com/rdp/cudnn-download) locally and then do a `scp from_local to_host@ip:my_folder` or directly use this in the server (for Cuda 12.x and Ubuntu 22.04):
+```
+wget https://developer.nvidia.com/downloads/compute/cudnn/secure/8.8.1/local_installers/12.0/cudnn-local-repo-ubuntu2204-8.8.1.3_1.0-1_amd64.deb/
+```
+and do the following:
 ```
 sudo dpkg -i cudnn-local-repo-${OS}-8.x.x.x_1.0-1_amd64.deb
 sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/
