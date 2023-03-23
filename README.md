@@ -58,6 +58,10 @@ First be sure that *python3* is already installed. If not, you can install it th
 ```
 sudo apt install python3
 ```
+Secondly be sure that *pip* is already installed. If not, you can install it this way: 
+```
+sudo apt-get install python3-pip
+```
 Finally, we can create the virtual environment:
 ```
 python3 -m venv ~/.python_venv
