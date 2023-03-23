@@ -205,3 +205,26 @@ If cuDNN is properly installed and running on your Linux system, you will see a 
 ```
 Test passed!
 ```
+
+#### Some furthers checks
+Let's check what is the output of:
+```
+nvcc --version
+```
+if nvcc is not "installed" don't worry... try this:
+```
+whereis nvcc
+```
+if the output is: `nvcc: ` and nothing else... the solution is adding this next two lines to the bottom of `.bashrc` file:
+```
+export PATH="/usr/local/cuda-12.1/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-12.1/lib64:$LD_LIBRARY_PATH"
+```
+(change cuda version if needed). Source `.bashrc` and try again `nvcc --version` you should see something like this:
+```
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2023 NVIDIA Corporation
+Built on Tue_Feb__7_19:32:13_PST_2023
+Cuda compilation tools, release 12.1, V12.1.66
+Build cuda_12.1.r12.1/compiler.32415258_0 
+```
