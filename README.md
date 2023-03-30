@@ -53,6 +53,15 @@ All the info is from this [link](https://urldefense.com/v3/__https://www.thegeek
 We recommend to create an *alias* in ```.bashrc``` for automatizing the login, i.e., ```alias server="ssh my_user@my_server_ip"```. Then for login type *server* and enjoy!
 
 ## Venv
+**If you want to use olther versions of python:**
+
+Use deadsnakes:
+```
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.8
+```
+
+---------------------------------------------
 
 First be sure that *python3* is already installed. If not, you can install it this way: 
 ```
