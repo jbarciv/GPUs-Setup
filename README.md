@@ -119,10 +119,12 @@ For Ubuntu, the kernel headers and development packages for the currently runnin
 sudo apt-get install linux-headers-$(uname -r)
 ```
 ### CUDA Drivers Installation & Cuda toolkit
-1. Go to: [NVIDIA download drivers](https://developer.nvidia.com/cuda-downloads)
+1. Go to: [NVIDIA download drivers for Cuda 12](https://developer.nvidia.com/cuda-downloads) or [here for Cuda 11.2](https://developer.nvidia.com/cuda-11.2.0-download-archive).
 2. Select the GPU and OS version from the drop-down menus.
 3. Download and install the NVIDIA graphics driver as indicated on that web page. For more information, select the ADDITIONAL INFORMATION tab for step-by-step instructions for installing a driver.
 4. Restart your system to ensure that the graphics driver takes effect.
+
+**¡¡Please pay a lot attention of which version of Cuda you want/need to install... because TensorFlow of Pytorch sometimes do not go so fast as Cuda releases...!!**
 
 We recommend for a cluster to install `deb(local)` as the installer type. The instructions will be summarized in the [NVIDIA download drivers](https://developer.nvidia.com/cuda-downloads) but are also explained in depth and generically in the [Cuda installation guide for linux (Ubuntu)](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu). 
 ##### Some notes about drivers and Cuda versions
