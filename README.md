@@ -185,7 +185,7 @@ wget https://developer.nvidia.com/downloads/compute/cudnn/secure/8.8.1/local_ins
 or
 
 ```
-wget https://developer.nvidia.com/downloads/compute/cudnn/secure/8.8.1/local_installers/11.8/cudnn-local-repo-ubuntu2004-8.8.1.3_1.0-1_amd64.deb/
+wget https://developer.nvidia.com/downloads/compute/cudnn/secure/8.8.1/local_installers/11.8/cudnn-local-repo-ubuntu2004-8.8.1.3_1.0-1_amd64.deb
 ```
 
 and do the following:
