@@ -2,7 +2,9 @@
 
 ## Description
 
-The next respository summarizes the basics steps to run a small cluster of GPUs. Basic tips and many links are provided to facilitate installation. The underlying intention is based on neuroevolutionary algorithms for research purposes.
+The next respository summarizes the basics steps to run a small cluster of GPUs. Basic tips and many links are provided to facilitate installation. The underlying intention is based on neuroevolutionary algorithms for research purposes. 
+
+> Please be advised that this code is provided without any warranties or guarantees, and I kindly request you to understand that I cannot be held liable for any consequential damages that may arise from its use.
 
 ## Table of Contents
 
@@ -247,6 +249,14 @@ Cuda compilation tools, release 12.1, V12.1.66
 Build cuda_12.1.r12.1/compiler.32415258_0 
 ```
 
+#### Others
+To **unistall**: from CUDA 11.4 onwards, an unistaller script* has been provided: `sudo /usr/local/cuda-11.4/bin/cuda-unistaller`. For CUDA 11.2: `sudo apt-get --purge remove "cuda*"`. 
+
+*The same for drivers: `sudo /usr/bin/nvidia-unistall`
+
+To **install**: I like *run files*. First install recommended drivers from NVIDIA web page and your specific GPU architecture. Second, install your desired *CUDA Toolkit* (version 11.2 is fine).
+
+
 ## Mig
 
 [Here](https://www.nvidia.com/es-es/technologies/multi-instance-gpu/), you can find all the information about Multi Instance GPU (MIG) a new NVIDIA Tesla Data Center GPUs feature that has been implemented by the NVIDIA group. 
@@ -291,7 +301,8 @@ To see the number of *profiles* that users can opt-in for when configuring the M
 ```
 nvidia-smi mig -lgip
 ```
-and you will see this result:
+and you will see [this result](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html#cuda-gi:~:text=nvidia%2Dsmi%20mig%20%2Dlgip).
+where the ID refers to the speficic partition you can select. 
 
 Or to list the possible placements avaible using:
 ```
@@ -303,12 +314,38 @@ nvidia-smi mig -lgipp
 We need to create the GPU instances and the corresponding Compute Instances (CI). Because, simply enabling MIG mode is not sufficient.
 Also note that :warning: **the created MIG devices are not persistent across systems reboots!!!** (for automated tooling see page 28 of the aforemetioned [MIG user guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html)) .
 
-For creating only GPU instances use this:
+For creating only GPU instances use this: (note how cgi refers to Create GPU Instance)
 ```
-
+sudo nvidia-smi mig -cgi 0,0,0 
 ```
+the number  referes to the ID, i.e., the profile that you are selecting... it will depend on the avaible possibilites and your hardware.
 
-For creating only Compute instances (CI) use this: (note how cci refers to Create Compute Instance
+For creating only Compute instances (CI) use this: (note how cci refers to Create Compute Instance)
 ```
 sudo nvidia-smi mig -cci 0,0,0 
+```
+
+I recomend you to create both at the same time:
+```
+sudo nvidia-smi mig -cgi 14,14,14,14 -C
+```
+Note some things: we add a flag `-C` for creating the CI at the same time and referenced to those GPU instances. But also, it should be a capital c. 14 is the ID profile selected, so 4 GPU instances will be created along 4 compute instances related.
+
+#### 4. Destroying Instances
+
+Compute Instances can be destroyed separately, using this code:
+```
+sudo nvidia-smi -dci
+```
+and then you can delete the GIs:
+```
+sudo nvidia-smi mig -dgi
+```
+Specific CIs under GI 1 will be deleted this way:
+```
+sudo nvidia-smi -dci 0,1,2 -gi 1
+```
+or easier you can delete all with:
+```
+sudo nvidia-smi mig -dgi
 ```
