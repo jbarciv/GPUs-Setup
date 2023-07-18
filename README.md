@@ -10,6 +10,7 @@ The next respository summarizes the basics steps to run a small cluster of GPUs.
 - [Virtual environment](#venv)
 - [TensorFlow 2 and Keras](#tensorflow2)
 - [GPU Drivers](#gpus)
+- [MIG](#mig)
 
 ## Server
 
@@ -244,4 +245,70 @@ Copyright (c) 2005-2023 NVIDIA Corporation
 Built on Tue_Feb__7_19:32:13_PST_2023
 Cuda compilation tools, release 12.1, V12.1.66
 Build cuda_12.1.r12.1/compiler.32415258_0 
+```
+
+## Mig
+
+[Here](https://www.nvidia.com/es-es/technologies/multi-instance-gpu/), you can find all the information about Multi Instance GPU (MIG) a new NVIDIA Tesla Data Center GPUs feature that has been implemented by the NVIDIA group. 
+MIG technology offers greater versatility in matching acceleration hardware to the computational needs of research in development. For instance, imagine that your deep neural network employed only consumes around 10\% of the available hardware resources of the GPUs, leaving a significant portion (90\%) untapped. However, by harnessing the potential of GPU partitioning, you can optimize performance and increase efficiency, achieving up to 40\% utilization of the GPU's capabilities. Basic instructions for NVIDIA A30 GPUs can be found via [this link](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html).
+
+### CUDA Device Enumeration
+
+Based on the provided information, certain items need to be highlighted:
+MIG supports running CUDA applications by specifying the CUDA device on which the application should be run. With CUDA 11/R450 and CUDA 12/R525, **only enumeration of a single MIG instance is supported**. In other words, *regardless of how many MIG devices are created (or made available to a container), **a single CUDA process can only enumerate a single MIG device***.
+
+CUDA applications treat a CI and its parent GI as a single CUDA device. CUDA is limited to use a single CI and will pick the first one available if several of them are visible. To summarize, there are two constraints:
+CUDA can only enumerate a single compute instance. CUDA will not enumerate non-MIG GPU if any compute instance is enumerated on any other GPU. Note that these constraints may be relaxed in future NVIDIA driver releases for MIG.
+
+The next is also important:
+
+**CUDA_VISIBLE_DEVICES** has been extended to add support for MIG. Depending on the driver versions being used, two formats are supported:
+With drivers >= R470 (470.42.01+), each MIG device is assigned a GPU UUID starting with MIG-<UUID>.
+With drivers < R470 (e.g. R450 and R460), each MIG device is enumerated by specifying the CI and the corresponding parent GI. The format follows this convention: MIG-<GPU-UUID>/<GPU instance ID>/<compute instance ID>.
+
+### Steps
+By default, MIG mode is not enabled on the GPU. 
+#### 1. Enable/Disable MIG mode
+All GPUs:
+```
+sudo nvidia-smi -mig 1
+```
+Specific GPU:
+```
+sudo nvidia-smi -i 0 -mig 1
+```
+note how `-i 0` makes reference to: `-i <GPU-IDs>`
+
+For disable MIG mode use:
+```
+sudo nvidia-smi -mig 0
+```
+for disabling a specific gpu use  `-i <GPU-IDs>`.
+
+#### 2. List GPU Intance Profiles
+
+To see the number of *profiles* that users can opt-in for when configuring the MIG. Use this:
+```
+nvidia-smi mig -lgip
+```
+and you will see this result:
+
+Or to list the possible placements avaible using:
+```
+nvidia-smi mig -lgipp
+```
+
+#### 3. Creating GPU instances and Compute Instances
+
+We need to create the GPU instances and the corresponding Compute Instances (CI). Because, simply enabling MIG mode is not sufficient.
+Also note that :warning: **the created MIG devices are not persistent across systems reboots!!!** (for automated tooling see page 28 of the aforemetioned [MIG user guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html)) .
+
+For creating only GPU instances use this:
+```
+
+```
+
+For creating only Compute instances (CI) use this: (note how cci refers to Create Compute Instance
+```
+sudo nvidia-smi mig -cci 0,0,0 
 ```
