@@ -336,7 +336,7 @@ Note some things: we add a flag `-C` for creating the CI at the same time and re
 
 Compute Instances can be destroyed separately, using this code:
 ```
-sudo nvidia-smi -dci
+sudo nvidia-smi mig -dci
 ```
 and then you can delete the GIs:
 ```
