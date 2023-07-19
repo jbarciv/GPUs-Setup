@@ -130,6 +130,14 @@ For Ubuntu, the kernel headers and development packages for the currently runnin
 ```
 sudo apt-get install linux-headers-$(uname -r)
 ```
+
+#### General advices
+To **unistall**: from CUDA 11.4 onwards, an unistaller script* has been provided: `sudo /usr/local/cuda-11.4/bin/cuda-unistaller`. For CUDA 11.2: `sudo apt-get --purge remove "cuda*"`. 
+
+*The same for drivers: `sudo /usr/bin/nvidia-unistall`
+
+To **install**: I like *run files*. First install recommended drivers from NVIDIA web page and your specific GPU architecture. Second, install your desired *CUDA Toolkit* (version 11.2 is fine).
+
 ### CUDA Drivers Installation & Cuda toolkit
 1. Go to: [NVIDIA download drivers for Cuda 12](https://developer.nvidia.com/cuda-downloads) or [here for Cuda 11.2](https://developer.nvidia.com/cuda-11.2.0-download-archive).
 2. Select the GPU and OS version from the drop-down menus.
@@ -248,13 +256,6 @@ Built on Tue_Feb__7_19:32:13_PST_2023
 Cuda compilation tools, release 12.1, V12.1.66
 Build cuda_12.1.r12.1/compiler.32415258_0 
 ```
-
-#### Others
-To **unistall**: from CUDA 11.4 onwards, an unistaller script* has been provided: `sudo /usr/local/cuda-11.4/bin/cuda-unistaller`. For CUDA 11.2: `sudo apt-get --purge remove "cuda*"`. 
-
-*The same for drivers: `sudo /usr/bin/nvidia-unistall`
-
-To **install**: I like *run files*. First install recommended drivers from NVIDIA web page and your specific GPU architecture. Second, install your desired *CUDA Toolkit* (version 11.2 is fine).
 
 
 ## Mig
