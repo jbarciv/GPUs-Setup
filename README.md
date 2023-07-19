@@ -300,14 +300,14 @@ for disabling a specific gpu use  `-i <GPU-IDs>`.
 
 To see the number of *profiles* that users can opt-in for when configuring the MIG. Use this:
 ```
-nvidia-smi mig -lgip
+sudo nvidia-smi mig -lgip
 ```
 and you will see [this result](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html#cuda-gi:~:text=nvidia%2Dsmi%20mig%20%2Dlgip).
 where the ID refers to the speficic partition you can select. 
 
 Or to list the possible placements avaible using:
 ```
-nvidia-smi mig -lgipp
+sudo nvidia-smi mig -lgipp
 ```
 
 #### 3. Creating GPU instances and Compute Instances
